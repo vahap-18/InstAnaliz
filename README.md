@@ -1,97 +1,122 @@
 # Instagram İstatistik Toplayıcı Programı
 
-Bu Python programı, belirlenen bir Instagram kullanıcısına ait temel istatistikleri toplar ve kullanıcıya gösterir. Program, açık Instagram hesaplarından çeşitli metrikler sunar ve bu bilgileri tablo halinde gösterir. Eğer kullanıcı gizli bir hesapsa, hangi verilerin alınamadığı açıkça belirtilir.
+Bu Python programı, belirtilen bir Instagram kullanıcısına ait çeşitli istatistikleri toplar ve kullanıcıya tablo formatında gösterir. Program, kullanıcının takipçi sayısından beğeni ve yorum oranlarına kadar geniş bir yelpazede bilgi sağlar. Eğer hedef hesap gizli bir hesapsa, toplanamayan veriler kullanıcıya bildirilir.
 
 ## Özellikler
 
-- **Takipçi Sayısı**: Belirtilen hesabın takipçi sayısını görüntüler.
+- **Takipçi Sayısı**: Belirtilen Instagram hesabının takipçi sayısını görüntüler.
 - **Gönderi Sayısı**: Hesabın toplam gönderi sayısını gösterir.
-- **Beğeni Sayısı** (Gizli Hesap Değilse): Gönderilerdeki toplam beğeni sayısını toplar.
-- **Yorum Sayısı** (Gizli Hesap Değilse): Gönderilerdeki toplam yorum sayısını toplar.
-- **Katılım Oranı** (Gizli Hesap Değilse): Beğeni ve yorumların toplamını kullanarak takipçi sayısına oranla etkileşim yüzdesini hesaplar.
-- **En Çok Beğenilen Video** (Gizli Hesap Değilse): Hesabın en çok beğeni alan videosunu bulur.
-- **En Çok İzlenen Video** (Gizli Hesap Değilse): Hesabın en çok görüntülenen videosunu bulur.
-- **Ortalama Etkileşim** (Gizli Hesap Değilse): Gönderi başına ortalama beğeni, yorum ve izlenme sayılarını hesaplar.
-- **Gizli Hesaplar İçin Uyarı**: Gizli hesaplar için veriler alınamazsa, kullanıcıya hangi verilerin alınamayacağı belirtilir.
+- **Beğeni Sayısı** (Gizli Hesap Değilse): Hesabın gönderilerindeki toplam beğeni sayısını toplar.
+- **Yorum Sayısı** (Gizli Hesap Değilse): Gönderilerdeki toplam yorum sayısını hesaplar.
+- **Katılım Oranı (Etkileşim Yüzdesi)**: Beğeni ve yorum sayısına göre hesaplanan etkileşim oranını gösterir.
+- **En Çok Beğenilen Gönderi**: Hesabın en fazla beğeni alan gönderisini bulur.
+- **En Çok Yorum Alan Gönderi**: Hesabın en çok yorum alan gönderisini gösterir.
+- **Ortalama Gönderi Etkileşimi**: Gönderi başına ortalama beğeni ve yorum sayısını hesaplar.
+- **Gizli Hesap Uyarısı**: Gizli hesaplar için alınamayan veriler hakkında kullanıcıya bilgi verir.
 
 ## Gereksinimler
 
-Bu programı çalıştırmak için aşağıdaki kütüphanelerin yüklü olması gerekmektedir:
+Programın çalışabilmesi için aşağıdaki Python kütüphanelerine ihtiyaç vardır:
 
-- `instaloader`
-- `tabulate`
-- `collections`
-- `time`
+- `instaloader`: Instagram verilerini toplamak için.
+- `rich`: Verilerin renkli ve düzenli bir şekilde terminalde gösterilmesi için.
+- `tqdm`: İşlem ilerlemesini göstermek için.
 
 Gerekli kütüphaneleri yüklemek için:
 
 ```bash
-pip install instaloader tabulate
+pip install instaloader rich tqdm
+
 ```
 
 ## Kullanım
 
 1. **Programı çalıştırın**:
-   Programı başlatmak için terminalde aşağıdaki komutu çalıştırın:
-
-   ```bash
-   python instagram_stats.py
-   ```
-
-2. **Kullanıcı Adı Girin**:
-   Program çalıştırıldığında sizden bir Instagram kullanıcı adı girmeniz istenecek.
-
+Terminalde aşağıdaki komut ile programı başlatın:
+    
+    ```bash
+    python instagram_analyzer.py
+    
+    ```
+    
+2. **Instagram Kullanıcı Adı Girin**:
+Program çalıştığında, analiz edilmesini istediğiniz Instagram kullanıcısının adını girmeniz istenecek. Kullanıcı adını girdikten sonra program hesap verilerini toplamaya başlayacaktır.
 3. **Sonuçları Görün**:
-   Program belirtilen kullanıcıya ait istatistikleri toplayacak ve tablo halinde ekrana yazdıracaktır.
+İstatistikler toplanıp analiz edildikten sonra tablo formatında ekrana yazdırılacaktır. Eğer analiz edilen hesap gizliyse, hangi verilerin alınamadığı kullanıcıya bildirilir.
 
-   - Eğer kullanıcı **gizli bir hesap** ise, program hangi verilerin alınamadığını bildirecektir.
+### Örnek Kullanım
 
-## Örnek Kullanım
-
-Programı çalıştırdıktan sonra bir Instagram kullanıcı adı girin:
+Aşağıdaki örnekte, `example_user` adında bir Instagram hesabı için topladığımız verileri görüyorsunuz:
 
 ```
 Lütfen bir Instagram kullanıcı adı girin: example_user
+
 ```
 
-Program daha sonra istatistikleri tablo formatında gösterecektir:
+Program çıktısı:
 
 ```
 ╒═══════════════════════════════════════╤═════════════╕
 │ Bilgi                                 │ Değer       │
 ╞═══════════════════════════════════════╪═════════════╡
-│ Takipçi Sayısı                        │ 5000        │
+│ Takipçi Sayısı                        │ 500         │
 ├───────────────────────────────────────┼─────────────┤
 │ Gönderi Sayısı                        │ 120         │
 ├───────────────────────────────────────┼─────────────┤
-│ Beğeni Sayısı                         │ 15000       │
+│ Beğeni Sayısı                         │ 1500        │
 ├───────────────────────────────────────┼─────────────┤
-│ Yorum Sayısı                          │ 3000        │
+│ Yorum Sayısı                          │ 300         │
 ├───────────────────────────────────────┼─────────────┤
-│ Katılım Oranı (%)                     │ 25.00%      │
+│ Katılım Oranı (%)                     │ 15.00%      │
 ├───────────────────────────────────────┼─────────────┤
-│ Toplam İzlenme Sayısı                 │ 90000       │
+│ En Çok Beğenilen Gönderi              │ Gönderi #23  │
 ├───────────────────────────────────────┼─────────────┤
-│ En Çok Beğenilen Video Beğeni Sayısı  │ 9500        │
+│ En Çok Yorum Alan Gönderi             │ Gönderi #45  │
 ├───────────────────────────────────────┼─────────────┤
-│ En Çok İzlenen Video İzlenme Sayısı   │ 50000       │
-├───────────────────────────────────────┼─────────────┤
-│ Ortalama Görüntüleme Sayısı           │ 166.67      │
-├───────────────────────────────────────┼─────────────┤
-│ Ortalama Beğeni Sayısı                │ 12.50       │
-├───────────────────────────────────────┼─────────────┤
-│ Ortalama Yorum Sayısı                 │ 2.50        │
+│ Ortalama Etkileşim                    │ 166.67      │
 ╘═══════════════════════════════════════╧═════════════╛
-```
-
-Eğer kullanıcı gizli bir hesapsa, alınamayan veriler belirtilir:
 
 ```
-Hesap gizli olduğu için aşağıdaki veriler alınamıyor:
+
+Eğer analiz edilen hesap **gizli** ise, şu şekilde bir çıktı alırsınız:
+
+```
+Bu hesap gizli olduğu için aşağıdaki verilere ulaşılamadı:
 
 - Beğeni Sayısı
 - Yorum Sayısı
-- Video Görüntüleme Sayısı
-- Gönderi Etkile
+- En Çok Beğenilen Gönderi
+- En Çok Yorum Alan Gönderi
 
 ```
+
+## Olası Hatalar ve Çözümleri
+
+- **Giriş Yapma Hatası**:
+    - **Hata Mesajı**: `Giriş yapılamadı. Lütfen kullanıcı adınızı ve şifrenizi kontrol edin.`
+    - **Çözüm**: Instagram kullanıcı adı veya şifre hatalı olabilir. Doğru bilgileri girdiğinizden emin olun. Ayrıca, çok sık oturum açma denemesi yaptıysanız, Instagram hesabınız geçici olarak engellenmiş olabilir.
+- **Profil Bulunamıyor Hatası**:
+    - **Hata Mesajı**: `Girilen kullanıcı adı geçerli değil veya kullanıcı hesabı gizli.`
+    - **Çözüm**: Instagram hesabının doğru olduğundan ve herkese açık olduğundan emin olun.
+- **Ağ Bağlantısı Sorunu**:
+    - **Hata Mesajı**: `Instagram'a bağlanılamıyor. Lütfen internet bağlantınızı kontrol edin.`
+    - **Çözüm**: İnternet bağlantınızı kontrol edin ve tekrar deneyin.
+- **Rate Limit Hatası**:
+    - **Hata Mesajı**: `Instagram API talep limitine ulaşıldı.`
+    - **Çözüm**: Instagram, API taleplerinde belirli limitler koyar. Bu hatayı alırsanız bir süre bekleyip tekrar deneyin.
+- **Gizli Hesap Uyarısı**:
+    - **Hata Mesajı**: `Bu hesap gizlidir ve bazı verilere ulaşılamıyor.`
+    - **Çözüm**: Gizli hesaplarda beğeni, yorum ve diğer etkileşim verilerine ulaşmak mümkün değildir.
+
+## Programı Geliştirirken Dikkat Edilecekler
+
+- **Hesap Limiti**: Instagram, anonim veya sık talepler sonucunda API limitine ulaşabilir. Çok fazla istek gönderiyorsanız ara vermek gerekebilir.
+- **Kütüphane Uyumluluğu**: Programın düzgün çalışması için kullanılan Python kütüphanelerinin güncel olduğundan emin olun.
+- **Gizli Hesaplar**: Instagram API, gizli hesaplardan belirli verileri toplamanıza izin vermez. Bu nedenle gizli hesaplar için programda belirli veriler eksik olacaktır.
+
+## İletişim
+
+Programla ilgili herhangi bir sorunuz veya öneriniz varsa, projenin geliştiricisi ile iletişime geçmekten çekinmeyin:
+
+- E-posta: rtoor6660@gmail.com
+- Instagram: [vahap_dogann](https://www.instagram.com/vahap_dogann/)
